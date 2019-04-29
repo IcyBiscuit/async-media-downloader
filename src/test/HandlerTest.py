@@ -2,6 +2,7 @@ from aiohttp import web
 from aiohttp.test_utils import AioHTTPTestCase, make_mocked_request
 
 from src.app.handlers.PocketHandler import routers
+import src.app.handlers.PocketHandler as pocketHandler
 
 
 class Test(AioHTTPTestCase):
@@ -27,3 +28,9 @@ class Test(AioHTTPTestCase):
             resp = await self.client.request("POST", "/downloadImage")
             print(await resp.json())
         self.loop.run_until_complete(image())
+
+    def sessionTest(self):
+        async def session():
+            clientSession = await pocketHandler.getSession()
+            print(clientSession)
+        self.loop.run_until_complete(session)

@@ -1,11 +1,16 @@
+# project
 .vscode
 .pytest_cache
 
-temp
-Lib
+# venv
+bin
+[Ll]ib
 Scripts
-Include
+[Ii]nclude
 __pycache__
+
+# floders and files
+temp
 
 pyvenv.cfg
 pip-selfcheck.json
