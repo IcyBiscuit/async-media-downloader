@@ -1,0 +1,11 @@
+.vscode
+.pytest_cache
+
+temp
+Lib
+Scripts
+Include
+__pycache__
+
+pyvenv.cfg
+pip-selfcheck.json
