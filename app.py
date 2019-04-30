@@ -20,6 +20,8 @@ for dir in dirs:
         logger.info(f"mkdir: {path.as_posix()}")
         path.mkdir(parents=True)
 
-app = asyncio.get_event_loop().run_until_complete(initApp())
+startUp=initApp
 
-web.run_app(app)
+if __name__ == "__main__":
+    app = asyncio.get_event_loop().run_until_complete(startUp())
+    web.run_app(app)
