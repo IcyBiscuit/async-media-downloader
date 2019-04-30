@@ -5,6 +5,8 @@ from src.app.main import initApp
 from src.configs.appConfig import config
 from src.app.logger.Logger import logger
 
+import asyncio
+
 BASE_DIR = pathlib.Path(__file__).parent
 sys.path.append(BASE_DIR.as_posix())
 
@@ -18,6 +20,6 @@ for dir in dirs:
         logger.info(f"mkdir: {path.as_posix()}")
         path.mkdir(parents=True)
 
-app = initApp()
+app = asyncio.get_event_loop().run_until_complete(initApp())
 
 web.run_app(app)
