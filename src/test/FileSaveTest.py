@@ -1,6 +1,9 @@
-from src.app.utils.SaveFileAsync import saveFile
 import asyncio
 
+from setup import setBasePath
+from src.app.utils.SaveFileAsync import saveFile
+
+setBasePath()
 
 file = open('src/temp/test.jpg', 'rb')
 
