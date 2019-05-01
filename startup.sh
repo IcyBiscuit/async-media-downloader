@@ -1,1 +1,1 @@
-GUNICORN_CMD_ARGS="--bind=127.0.0.1:8422 --workers=3 --worker-class aiohttp.GunicornWebWorker" gunicorn app:startUp
+GUNICORN_CMD_ARGS="--bind=127.0.0.1:8422 --workers=3 --worker-class aiohttp.worker.GunicornWebWorker" gunicorn app:startUp
