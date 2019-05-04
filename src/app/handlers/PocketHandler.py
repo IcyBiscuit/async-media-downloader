@@ -1,5 +1,3 @@
-import asyncio
-import functools
 import uuid
 
 from aiohttp import ClientSession, web
@@ -12,20 +10,15 @@ filePrefix = config["filePathPrefix"]
 routers = web.RouteTableDef()
 
 
-def convert_async_task(method):
-    @functools.wraps(method)
-    async def wrapper(self, *args, **kwargs):
-        coro = method(self, *args, **kwargs)
-        return await asyncio.ensure_future(coro)
-    return wrapper
-
-
 @routers.post(path="/downloadImage")
-async def downloadImage(requests):
+async def downloadImage(requests: web.Request):
+    """
+    下载静态图片处理流程
+    """
     logger.debug(requests)
     data = await requests.post()
     if "url" not in data:
-        return web.json_response({"msg": "缺少请求"})
+        return web.json_response({"msg": "缺少请求参数"})
 
     logger.debug(data["url"])
     imgUrl = data["url"]
@@ -46,11 +39,14 @@ async def downloadImage(requests):
 
 
 @routers.post(path="/downloadGif")
-async def downloadImage(requests):
+async def downloadGif(requests: web.Request):
+    """
+    下载Gif图片处理流程
+    """
     logger.debug(requests)
     data = await requests.post()
     if "url" not in data:
-        return web.json_response({"msg": "缺少请求"})
+        return web.json_response({"msg": "缺少请求参数"})
 
     logger.debug(data["url"])
     imgUrl = data["url"]
@@ -71,11 +67,14 @@ async def downloadImage(requests):
 
 
 @routers.post(path="/downloadAudio")
-async def downloadAudio(requests):
+async def downloadAudio(requests: web.Request):
+    """
+    下载语音文件处理流程
+    """
     logger.debug(requests)
     data = await requests.post()
     if "url" not in data:
-        return web.json_response({"msg": "缺少请求"})
+        return web.json_response({"msg": "缺少请求参数"})
 
     logger.debug(data["url"])
     audioUrl = data["url"]
@@ -95,12 +94,12 @@ async def downloadAudio(requests):
         })
 
 
-async def getData(url):
-    '''
+async def getData(url: str):
+    """
     通过url获取网络资源数据
-    Args:
-        url: 网络资源所在url
-    '''
+    :param url: 网络资源所在url
+    :returns: 资源的二进制数据
+    """
     async with ClientSession() as session:
         async with session.get(url=url) as resp:
             return await resp.read()
