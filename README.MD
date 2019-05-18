@@ -40,6 +40,7 @@ Windows操作系统需直接运行`app.py`文件
 ### 配置文件
 
 配置文件位于`src/configs/appConfig.py`
+
 配置项|配置内容|备注
 :---:|---|---
 `filePathPrefix`|下载文件路径前缀|建议使用绝对路径|
